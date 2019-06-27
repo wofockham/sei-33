@@ -49,7 +49,7 @@ for (let i = 0; i < library.length; i++) {
   const book = library[i];
   const bookInfo = `"${ book.title }" by ${ book.author }`;
 
-  if (book.alreadyRead === true) {
+  if (book.alreadyRead) {
     console.log( `You already read ${ bookInfo }` );
   } else {
     console.log( `You still need to read "${ bookInfo }` );
@@ -62,6 +62,30 @@ for (let i = 0; i < library.length; i++) {
 //
 // - Create an object to store the following information about your favorite movie: title (a string), duration (a number), and stars (an array of strings).
 // - Create a function to print out the movie information like so: "Puff the Magic Dragon lasts for 30 minutes. Stars: Puff, Jackie, Living Sneezes."
-//
-//
-//
+
+const myFavouriteMovie = {
+  title: 'O Brother! Where Art Thou?',
+  duration: 107,
+  stars: ['George Clooney', 'John Goodman', 'Gillian Welch', 'That Really Slinty Guy']
+};
+
+const ghostbusters = {
+  title: 'Ghostbusters',
+  duration: 105,
+  stars: ['Bill Murray', 'Dan Akroyd', 'Signourney Weaver']
+};
+
+const alien = {
+  title: 'Alien',
+  duration: 117,
+  stars: ['Signourney Weaver', 'Jonesy']
+};
+
+const movieInfo = function (movie) {
+  const info = `${ movie.title } lasts for ${ movie.duration } minutes. Stars: ${ movie.stars.join(', ') }`;
+  console.log( info );
+};
+
+movieInfo( myFavouriteMovie );
+movieInfo( ghostbusters );
+movieInfo( alien );
