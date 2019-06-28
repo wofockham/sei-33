@@ -1,16 +1,16 @@
 // Factories are a way to mass produce objects to they all have the same shape.
 
 const catFactory = function (n, a, f) { // n: name, a: age, f: fur color
-  // make a cat object with the right shape and the values supplied
-  const cat = {
+  return {
     name: n,
     age: a,
     furColor: f,
-    species: 'feline'
+    species: 'feline',
+    meow: function () {
+      console.log( this );
+      console.log(`Meow, my name is ${ this.name }`);
+    }
   };
-
-  // return the cat object
-  return cat;
 };
 
 const cuteCats = [
@@ -30,6 +30,7 @@ const cuteCats = [
   }
 
 // Prototypal Inheritance //////////////////////////////////////////////////////
+// Historically interesting but not essential for now (or anymore).
 
 // Constructor
 const Cat = function (n, a, f) {
@@ -37,6 +38,9 @@ const Cat = function (n, a, f) {
   this.name = n;
   this.age = a;
   this.furColor = f;
+  this.meow = function () {
+    console.log(`Meow, my name is ${ this.name }`);
+  }
   // no need to return "this" -- it gets returned automagically.
 };
 
@@ -46,4 +50,9 @@ const audrey = new Cat('Audrey', 2, 'striped grey');
 // The advantage of Cat Prototypes
 // You can extend the prototype AFTER you create them.
 
-Cat.protoype.species = 'feline';
+Cat.prototype.species = 'feline';
+Cat.prototype.eat = function (food) {
+  console.log('Yum, I love to eat ' + food);
+};
+
+audrey.eat('gelatin');
