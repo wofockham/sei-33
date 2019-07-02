@@ -1,0 +1,26 @@
+/*
+Typical project use:
+
+* {
+  box-sizing: border-box;
+}
+
+*/
+
+body {
+  background-color: yellow;
+}
+
+.old {
+  width: 300px;
+  height: 300px;
+  border: 1px solid black;
+}
+
+.new {
+  width: 300px;
+  height: 300px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  padding: 20px;
+}
