@@ -11,10 +11,19 @@ const books = [
   }
 ];
 
+const ul = document.createElement('ul'); // Detached DOM node
+
 for (let i = 0; i < books.length; i++) {
   const book = books[i];
 
-  const p = document.createElement('p');
-  p.innerText = `${ book.title } by ${ book.author }`;
-  document.body.appendChild( p );
+  const li = document.createElement('li');
+  li.innerText = `${ book.title } by ${ book.author }`;
+
+  if (book.alreadyRead) {
+    li.className = 'alreadyRead';
+  }
+
+  ul.appendChild( li );
 }
+
+document.body.appendChild(ul);
