@@ -29,3 +29,6 @@ for (var i = 0; i < $links.length; i++) {
 //       $('<img>').attr('src', youtube.generateThumbnailUrl($(this).attr('href')))
 //     );
 // });
+
+$('h2').funText(500, 'reverseCandy');
+$('a').funText(200, 'reverseCandy');
