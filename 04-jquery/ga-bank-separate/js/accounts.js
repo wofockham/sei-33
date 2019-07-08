@@ -1,3 +1,12 @@
+// Our account sobject is solely concerned with the rules for interacting with
+// bank accounts.
+
+// It is the single source of truth for the current balance.
+
+// It knows how to do overdraft protection.
+
+// This code has never heard of the DOM.
+
 const accounts = {
   checkingBalance: 0,
   savingsBalance: 0,
@@ -35,4 +44,4 @@ const accounts = {
       this.checkingBalance -= difference;
     }
   }
-}
+};

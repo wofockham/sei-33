@@ -1,4 +1,8 @@
-// Update the screen with whatever the current data in accounts is, whenever it's called.
+// This code knows nothing of overdraft protection.
+// It simply connects DOM elements to logical functions defined elsewhere using event handlers.
+
+// Our very handy render() function updates every part of the DOM with the current balances.
+// We call it anytime something in our accounts data might have changed.
 const render = function () {
   $('#checking-balance').text('$' + accounts.checkingBalance);
   $('#savings-balance').text('$' + accounts.savingsBalance);
