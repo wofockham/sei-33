@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/hello' => 'pages#hello'
   get '/faq' => 'pages#faq'
   get '/about' => 'pages#about'
+  get '/funny' => 'pages#lol'
 
   # Car stuff
   get '/auto/:color' => 'auto#color'
