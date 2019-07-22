@@ -15,9 +15,15 @@ ActiveRecord::Base.logger = Logger.new(STDERR)
 
 # Models
 class Butterfly < ActiveRecord::Base
+  belongs_to :plant, :optional => true
 end
 
 class Plant < ActiveRecord::Base
+  has_many :butterflies
+end
+
+get '/pry' do
+  binding.pry
 end
 
 get '/' do
