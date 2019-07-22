@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @butterfly.name %>
+</p>
+
+<p>
+  <strong>Family:</strong>
+  <%= @butterfly.family %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @butterfly.image %>
+</p>
+
+<%= link_to 'Edit', edit_butterfly_path(@butterfly) %> |
+<%= link_to 'Back', butterflies_path %>

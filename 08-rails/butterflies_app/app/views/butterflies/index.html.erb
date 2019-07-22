@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Butterflies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Family</th>
+      <th>Image</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @butterflies.each do |butterfly| %>
+      <tr>
+        <td><%= butterfly.name %></td>
+        <td><%= butterfly.family %></td>
+        <td><%= butterfly.image %></td>
+        <td><%= link_to 'Show', butterfly %></td>
+        <td><%= link_to 'Edit', edit_butterfly_path(butterfly) %></td>
+        <td><%= link_to 'Destroy', butterfly, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Butterfly', new_butterfly_path %>
