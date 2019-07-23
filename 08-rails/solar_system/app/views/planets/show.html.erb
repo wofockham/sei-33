@@ -11,5 +11,6 @@
 </ul>
 
 <div class="controls">
+  <%= link_to 'Edit planet', edit_planet_path(@planet.id) %>
   <%= button_to 'Delete planet', planet_path(@planet.id), :method => 'delete', :class => 'warning' %>
 </div>
