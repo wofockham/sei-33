@@ -1,7 +1,7 @@
 User.destroy_all
 puts "Creating users"
-u1 = User.create :email => 'craigsy@ga.co'
-u2 = User.create :email => 'jonesy@ga.co'
+u1 = User.create :email => 'craigsy@ga.co', :password => 'chicken'
+u2 = User.create :email => 'jonesy@ga.co', :password => 'chicken'
 
 Song.destroy_all
 puts "Creating songs"
