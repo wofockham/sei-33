@@ -4,8 +4,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new user_params # Set up the user but don't save yet.    
+    @user = User.new user_params # Set up the user but don't save yet.
     if @user.save # .save returns true if the user is valid, and false otherwise.
+      session[:user_id] = @user.id # Login when signing up.
       redirect_to root_path
     else
       render :new

@@ -1,5 +1,9 @@
 <h1>Log in</h1>
 
+<p>
+  <%= flash[:error_message] %>
+</p>
+
 <%= form_tag login_path do %>
 
   <%= label_tag :email %>
