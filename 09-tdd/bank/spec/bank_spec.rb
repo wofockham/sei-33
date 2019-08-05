@@ -15,7 +15,7 @@ describe Bank do
   describe '#create_account' do
     it 'creates an account for a particular user' do
       bank.create_account 'Craigsy', 7
-      expect(bank.accounts['Craigsy']).to eq 7
+      expect(bank.balance('Craigsy')).to eq 7
     end
   end
 
@@ -24,6 +24,28 @@ describe Bank do
       bank.create_account 'Jonesy', 200
       bank.deposit 'Jonesy', 300
       expect(bank.accounts['Jonesy']).to eq 500
+    end
+  end
+
+  describe '#withdraw' do
+    it 'withdraws an amount from a particular account' do
+      bank.create_account 'Bazza', 200
+      bank.withdraw 'Bazza', 54.29
+      expect(bank.accounts['Bazza']).to eq 200-54.29
+    end
+
+    it 'ignores withdrawals that exceed the balance' do
+      bank.create_account 'Charlie', 1
+      bank.withdraw 'Charlie', 1_000_000
+      expect(bank.balance('Charlie')).to eq 1
+    end
+  end
+
+  describe '#balance' do
+    it 'returns the balance for some particular account' do
+      bank.create_account 'Mad Robby', 5000
+      balance = bank.balance 'Mad Robby'
+      expect(balance).to eq 5000
     end
   end
 end
