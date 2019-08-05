@@ -1,12 +1,25 @@
-const xhr = new XMLHttpRequest();
+const fetchFact = function () {
 
-xhr.onreadystatechange = function () {
-  if (xhr.readyState !== 4) {
-    return; // It's too soon for us to see any data yet.
-  }
+  const xhr = new XMLHttpRequest();
 
-  document.body.innerHTML = xhr.responseText;
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState !== 4) {
+      return; // It's too soon for us to see any data yet.
+    }
+
+    const data = JSON.parse( xhr.responseText );
+
+    const p = document.createElement('p');
+    p.innerHTML = data.text; // data["text"]
+
+    document.body.appendChild(p);
+
+  };
+
+  xhr.open('GET', 'http://numbersapi.com/random/trivia?json');
+  xhr.send(); // Asynchronous
+
 };
 
-xhr.open('GET', 'http://numbersapi.com/random/trivia');
-xhr.send(); // Asynchronous
+document.getElementById('fetch').addEventListener('click', fetchFact);
+fetchFact();
