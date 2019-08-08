@@ -1,6 +1,5 @@
 const state = {
   pageNum: 1,
-  requestInProgress: false,
   lastPageReached: false
 };
 
@@ -28,8 +27,7 @@ const showImages = function (results) {
 };
 
 const searchFlickr = function (terms) {
-  if (state.requestInProgress || state.lastPageReached) return;
-  state.requestInProgress = true;
+  if (state.lastPageReached) return;
 
   console.log('Searching Flickr for these terms', terms, state);
 
@@ -43,7 +41,6 @@ const searchFlickr = function (terms) {
     page: state.pageNum++
   }).done( showImages ).done(function (data) {
     console.log(data);
-    state.requestInProgress = false;
     if (data.photos.page >= data.photos.pages) {
       state.lastPageReached = true;
     }
@@ -62,12 +59,13 @@ $(document).ready(function () {
   });
 
   // Extremely twitchy
+  const debouncedSearchFlickr = _.debounce(searchFlickr, 4000, { trailing: false });
   $(window).on('scroll', function () {
     const scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
 
     if (scrollBottom < 650) {
       const query = $('#query').val();
-      searchFlickr(query);
+      debouncedSearchFlickr(query);
     }
   });
 });
