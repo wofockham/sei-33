@@ -1,3 +1,9 @@
+const state = {
+  pageNum: 1,
+  requestInProgress: false,
+  lastPageReached: false
+};
+
 const showImages = function (results) {
   // Nested helper function
   const generateURL = function (p) {
@@ -14,8 +20,6 @@ const showImages = function (results) {
     ].join('');
   };
 
-  console.log( results );
-
   _(results.photos.photo).each(function (photo) {
     const thumbnailURL = generateURL(photo);
     const $img = $('<img>', {src: thumbnailURL}); // equivalent to .attr('src', thumbnailURL)
@@ -24,7 +28,10 @@ const showImages = function (results) {
 };
 
 const searchFlickr = function (terms) {
-  console.log('Searching Flickr for these terms', terms);
+  if (state.requestInProgress || state.lastPageReached) return;
+  state.requestInProgress = true;
+
+  console.log('Searching Flickr for these terms', terms, state);
 
   const flickrURL = 'https://api.flickr.com/services/rest?jsoncallback=?';
 
@@ -32,8 +39,15 @@ const searchFlickr = function (terms) {
     method: 'flickr.photos.search',
     api_key: '2f5ac274ecfac5a455f38745704ad084', // This is not a secret key
     text: terms,
-    format: 'json'
-  }).done( showImages );
+    format: 'json',
+    page: state.pageNum++
+  }).done( showImages ).done(function (data) {
+    console.log(data);
+    state.requestInProgress = false;
+    if (data.photos.page >= data.photos.pages) {
+      state.lastPageReached = true;
+    }
+  });
 };
 
 $(document).ready(function () {
@@ -41,6 +55,8 @@ $(document).ready(function () {
     event.preventDefault(); // Stay on this page.
 
     const query = $('#query').val();
+    state.pageNum = 1;
+    state.lastPageReached = false;
     searchFlickr(query);
     $('#images').empty();
   });
