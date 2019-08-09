@@ -14,7 +14,7 @@ console.log( _(bumpyArr).flatten() );
 console.log( _(uncompactedArr).compact() );
 
 // Find all of the unique elements in the following arrays - [ 1, 25, 100 ], [ 1, 14, 25 ] and 24, Infinity, -0
-const uniques = _.unique(_.flatten( [[ 1, 25, 100 ], [ 1, 14, 25 ], [24, Infinity, -0]] ));
+const uniques = _.union([ 1, 25, 100 ], [ 1, 14, 25 ], [24, Infinity, -0]);
 console.log( uniques );
 
 // Find the index of the first element in numbers that is over 7 and is even
