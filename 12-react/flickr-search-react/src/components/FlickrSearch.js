@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import jsonp from 'jsonp-es6';
+import jsonp from 'jsonp-es6'; // Usually this is: axios
 import _ from 'underscore';
 
 class FlickrSearch extends Component {
