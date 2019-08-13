@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 const SERVER_URL = 'http://localhost:3000/secrets.json';
-// const SERVER_URL = '...';
+// const SERVER_URL = 'http://ca0ca0c4.ngrok.io/secrets.json';
 
 class Secrets extends Component {
   constructor() {
@@ -12,6 +12,7 @@ class Secrets extends Component {
     };
     this.saveSecret = this.saveSecret.bind(this); // Why? BECAUSE the function needs to use this.anything.
 
+    // polling
     const fetchSecrets = () => {
       axios.get(SERVER_URL).then((results) => {
         this.setState({secrets: results.data});
@@ -24,7 +25,7 @@ class Secrets extends Component {
 
   saveSecret(content) {
     axios.post(SERVER_URL, { content: content }).then((result) => {
-      console.log( result );
+      this.setState({secrets: [...this.state.secrets, result.data]}); // ES6 Spread Operator
     });
   }
 
