@@ -19,7 +19,30 @@ def fibonacci_recursive(n)
   end
 end
 
-# TODO: Implement this in a faster way.
+# Memoisation
+def fib_memo(n)
+  @fib ||= {} # @fib = @fib || {}
+
+  if @fib[n]
+    @fib[n]
+  elsif n == 1 || n == 2
+    1
+  else
+    result = fib_memo(n-1) + fib_memo(n-2)
+    @fib[n] = result
+    result
+  end
+end
+
+# Linear recursion
+# TODO: Research Tail Call Optimisation (TCO)
+def fib(n, a=1, b=1)
+  if n == 1 || n == 2
+    b # Base case
+  else
+    fib(n-1, b, a+b)
+  end
+end
 
 require 'pry'
 binding.pry
