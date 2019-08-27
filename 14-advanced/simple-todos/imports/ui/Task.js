@@ -10,9 +10,17 @@ export default class Task extends Component {
     });
   }
 
+  deleteTask() {
+    Tasks.remove(this.props.task._id);
+  }
+
   render() {
+    const taskClassName = this.props.task.completed ? 'checked' : '';
     return (
-      <li>
+      <li className={taskClassName}>
+        <button className="delete" onClick={this.deleteTask.bind(this)}>
+          &times;
+        </button>
         <input
           type="checkbox"
           readOnly
