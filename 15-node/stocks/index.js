@@ -16,6 +16,8 @@ server.get('/info', (req, res) => {
   const symbol = req.query.symbol;
   stockfinder(symbol, APIKEY).then((response) => {
     res.render('info.ejs', { symbol: symbol, price: response[0].lastSalePrice });
+  }).catch((err) => {
+    res.redirect('/');
   })
 });
 
