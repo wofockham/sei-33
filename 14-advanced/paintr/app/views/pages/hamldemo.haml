@@ -1,0 +1,18 @@
+%h1.heading.wednesday#frozen Hello World
+
+%h2= "Here is your lucky number: #{ @lucky_number }"
+
+%h3= 23 * 74
+
+%h4 HAML is a whitespace significant language
+
+%div.container
+  %p
+    %span Here is a span inside a paragraph inside a container
+  %p Here is another paragraph -- this is a sibling to the first paragraph
+
+%ul
+  - %w{ Groucho Harpo Chico Zeppo }.each do |brother|
+    %li= brother
+
+%p HAML knows where to close a block, based on your indentation.
