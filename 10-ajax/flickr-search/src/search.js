@@ -1,30 +1,37 @@
-'use strict';
-
-var state = {
+const state = {
   pageNum: 1,
   lastPageReached: false
 };
 
-var showImages = function showImages(results) {
+const showImages = function (results) {
   // Nested helper function
-  var generateURL = function generateURL(p) {
-    return ['http://farm', p.farm, '.static.flickr.com/', p.server, '/', p.id, '_', p.secret, '_q.jpg' // Change q to something else for different sizes
+  const generateURL = function (p) {
+    return [
+      'http://farm',
+      p.farm,
+      '.static.flickr.com/',
+      p.server,
+      '/',
+      p.id,
+      '_',
+      p.secret,
+      '_q.jpg' // Change q to something else for different sizes
     ].join('');
   };
 
   _(results.photos.photo).each(function (photo) {
-    var thumbnailURL = generateURL(photo);
-    var $img = $('<img>', { src: thumbnailURL }); // equivalent to .attr('src', thumbnailURL)
+    const thumbnailURL = generateURL(photo);
+    const $img = $('<img>', {src: thumbnailURL}); // equivalent to .attr('src', thumbnailURL)
     $img.appendTo('#images');
   });
 };
 
-var searchFlickr = function searchFlickr(terms) {
+const searchFlickr = function (terms) {
   if (state.lastPageReached) return;
 
-  console.log('Searching Flickr for these terms: ' + terms, state);
+  console.log(`Searching Flickr for these terms: ${ terms }`, state);
 
-  var flickrURL = 'https://api.flickr.com/services/rest?jsoncallback=?';
+  const flickrURL = 'https://api.flickr.com/services/rest?jsoncallback=?';
 
   $.getJSON(flickrURL, {
     method: 'flickr.photos.search',
@@ -32,7 +39,7 @@ var searchFlickr = function searchFlickr(terms) {
     text: terms,
     format: 'json',
     page: state.pageNum++
-  }).done(showImages).done(function (data) {
+  }).done( showImages ).done(function (data) {
     console.log(data);
     if (data.photos.page >= data.photos.pages) {
       state.lastPageReached = true;
@@ -44,7 +51,7 @@ $(document).ready(function () {
   $('#search').on('submit', function (event) {
     event.preventDefault(); // Stay on this page.
 
-    var query = $('#query').val();
+    const query = $('#query').val();
     state.pageNum = 1;
     state.lastPageReached = false;
     searchFlickr(query);
@@ -52,12 +59,12 @@ $(document).ready(function () {
   });
 
   // Extremely twitchy
-  var debouncedSearchFlickr = _.debounce(searchFlickr, 4000, { trailing: false });
+  const debouncedSearchFlickr = _.debounce(searchFlickr, 4000, { trailing: false });
   $(window).on('scroll', function () {
-    var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
+    const scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
 
     if (scrollBottom < 650) {
-      var query = $('#query').val();
+      const query = $('#query').val();
       debouncedSearchFlickr(query);
     }
   });
