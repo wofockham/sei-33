@@ -9,7 +9,7 @@ const isCrawlable = function (url) {
 };
 
 const c = new Crawler({
-  ratelimit: 1000,
+  rateLimit: 1000,
   callback: function (err, res, done) {
 
     // Only travesrse HTML sites where Cheerio ($) is a function.
