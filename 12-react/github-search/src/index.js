@@ -1,6 +1,6 @@
+import 'preact/devtools';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import 'preact/devtools';
 
 import { HashRouter as Router, Route } from 'react-router-dom';
 
